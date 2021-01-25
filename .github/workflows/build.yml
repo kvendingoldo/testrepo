@@ -1,0 +1,21 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+      - 'releases/**'
+
+jobs:
+  main:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set application version
+        uses: kvendingoldo/semver-action@v1.1
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
