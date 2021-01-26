@@ -15,7 +15,8 @@ jobs:
           fetch-depth: 0
 
       - name: Set application version
-        uses: kvendingoldo/semver-action@v1.1
+        id: set_version
+        uses: kvendingoldo/semver-action@main
 
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+      - name: Print mage digest
+        run: echo ${{ steps.set_version.outputs.version }}
