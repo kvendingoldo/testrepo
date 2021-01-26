@@ -18,5 +18,5 @@ jobs:
         id: set_version
         uses: kvendingoldo/semver-action@main
 
-      - name: Print mage digest
+      - name: Print image digest
         run: echo ${{ steps.set_version.outputs.version }}
