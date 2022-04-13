@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set application version
-        uses: kvendingoldo/semver-action@58bfdc3f804f31d88ec18a03ea01c48e2a924bca
+        uses: kvendingoldo/semver-action@dbea13fa1da0d5f38ef587bdbb513258a7dd0c09
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
