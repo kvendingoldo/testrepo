@@ -11,15 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        name: work around permission issue
-        run: git config --global --add safe.directory /github/workspace
-      -
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.0.1
         with:
           fetch-depth: 0
       -
         name: Set application version
-        uses: kvendingoldo/semver-action@dbea13fa1da0d5f38ef587bdbb513258a7dd0c09
+        uses: kvendingoldo/semver-action@8275fd430734c9b5fd738495619238fa09f40af6
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
