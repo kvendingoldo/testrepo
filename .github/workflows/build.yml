@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
-        uses: actions/checkout@v2.4.1
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v3.0.1
+        # with:
+        #   fetch-depth: 0
       -
         name: Set application version
         uses: kvendingoldo/semver-action@8275fd430734c9b5fd738495619238fa09f40af6
