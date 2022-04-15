@@ -17,6 +17,8 @@ jobs:
       -
         name: Set application version
         uses: kvendingoldo/semver-action@v1.9
+        with:
+          primary_branch: main
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
