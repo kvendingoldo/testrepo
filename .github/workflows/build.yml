@@ -16,9 +16,15 @@ jobs:
           fetch-depth: 0
       -
         name: Set application version
-        uses: kvendingoldo/semver-action@v1.9
+        uses: kvendingoldo/semver-action@v1.10
         with:
           primary_branch: main
       -
-        name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+        name: Generated version
+        run: echo ${{ steps.set_version.outputs.version }}
+      -
+        name: Safe version
+        run: echo ${{ steps.set_version.outputs.safe_version }}
+      -
+        name: Java version
+        run: echo ${{ steps.set_version.outputs.java_version }}
