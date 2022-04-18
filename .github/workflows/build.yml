@@ -16,6 +16,7 @@ jobs:
           fetch-depth: 0
       -
         name: Set application version
+        id: set_version
         uses: kvendingoldo/semver-action@v1.10
         with:
           primary_branch: main
