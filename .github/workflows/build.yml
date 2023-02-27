@@ -22,7 +22,7 @@ jobs:
           primary_branch: main
           enable_github_releases: true
           github_token: ""
-          tag_prefix: "v"
+          release_tag_prefix: "v"
       -
         name: Generated version
         run: echo ${{ steps.set_version.outputs.version }}
