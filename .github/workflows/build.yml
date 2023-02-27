@@ -13,6 +13,12 @@ on:
 jobs:
   main:
     runs-on: ubuntu-20.04
+
+    permissions:
+      contents: write
+      repository-projects: write
+      packages: write
+      pull-requests: write
     steps:
       -
         uses: actions/checkout@v3.0.1
@@ -22,11 +28,7 @@ jobs:
         name: Set application version
         id: set_version
         uses: kvendingoldo/semver-action@main
-        permissions:
-          contents: write
-          repository-projects: write
-          packages: write
-          pull-requests: write
+
         with:
           primary_branch: main
           enable_github_releases: true
