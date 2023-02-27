@@ -6,11 +6,9 @@ on:
       - main
       - 'releases/**'
 
-permissions:
-  contents: write
-  repository-projects: write
-  packages: write
-  pull-requests: write
+#permissions:
+#  contents: write
+#  pull-requests: read
 
 jobs:
   main:
@@ -24,10 +22,14 @@ jobs:
         name: Set application version
         id: set_version
         uses: kvendingoldo/semver-action@main
+        permissions:
+          contents: write
+          repository-projects: write
+          packages: write
+          pull-requests: write
         with:
           primary_branch: main
           enable_github_releases: true
-          github_token: ""
           release_tag_prefix: "v"
       -
         name: Generated version
