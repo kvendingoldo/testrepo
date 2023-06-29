@@ -1,0 +1,58 @@
+name: "CI/CD Pipeline"
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'release/**'
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - ready_for_review
+      - synchronize
+      - labeled
+
+concurrency:
+  group: cicd-pipeline-${{ github.workflow }}-${{ github.event.pull_request.number || github.event.pull_request.head.ref || github.ref }}
+
+jobs:
+  build:
+    if: |
+      (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'CI: Build')) ||
+      github.event_name == 'push'
+    runs-on: ubuntu-20.04
+    outputs:
+      version: ${{ steps.set_version.outputs.safe_version }}
+    permissions:
+      contents: write
+    steps:
+      -
+        uses: actions/checkout@v3
+        if: github.event_name == 'pull_request'
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      -
+        uses: actions/checkout@v3
+        if: github.event_name == 'push'
+        with:
+          fetch-depth: 0
+      -
+        name: Set application version
+        id: set_version
+        uses: kvendingoldo/semver-action@v1.15
+        with:
+          primary_branch: main
+          enable_github_releases: true
+          release_tag_prefix: "v"
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+      -
+        name: Generated version
+        run: echo ${{ steps.set_version.outputs.version }}
+      -
+        name: Safe version
+        run: echo ${{ steps.set_version.outputs.safe_version }}
+      -
+        name: Java version
+        run: echo ${{ steps.set_version.outputs.java_version }}
