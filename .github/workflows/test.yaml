@@ -3,10 +3,6 @@ name: "CD: alex"
 on:
   workflow_dispatch:
     inputs:
-      version:
-        required: true
-        type: string
-        description: Application version
       component:
         type: choice
         description: component name
