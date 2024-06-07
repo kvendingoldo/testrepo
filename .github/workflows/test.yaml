@@ -1,0 +1,27 @@
+name: "CD: alex"
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+        description: Application version
+      component:
+        type: choice
+        description: component name
+        options:
+          - uonedev:user-service-65e8dcef6fce3a08ade5196a:65ea23ae1c83a95f18641be3
+          - uonedev:user-service-65e8dcef6fcssssssse5196a:65ea23ae1c83a95f18641be3
+          - uoneprd:user-service-65e8dceaaaaaaaaaaae5196a:65ea23ae1c83a95f18641be3
+
+concurrency:
+  group: cd-alex-${{ github.workflow }}-${{ github.event.pull_request.number || github.event.pull_request.head.ref || github.ref }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
